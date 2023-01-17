@@ -10,6 +10,7 @@ export function useFetchCharacters() {
     id: 1,
     name: '',
   });
+  
 
   const [showAlert, setShowAlert] = useState(false);
 
