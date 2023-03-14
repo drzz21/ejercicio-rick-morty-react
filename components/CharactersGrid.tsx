@@ -14,6 +14,11 @@ export default function CharactersGrid() {
     cachedDeleteCharacter,
   } = useFetchCharacters();
 
+  const [query, setQuery] = React.useState('');
+
+  const filteredItems = characters.filter((item) =>
+    item.name.toLowerCase().includes(query.toLowerCase())
+  );
   return (
     <React.Fragment>
       {createPortal(
@@ -32,7 +37,20 @@ export default function CharactersGrid() {
 
       <div className="container-fluid mt-3">
         <div className="row">
-          {characters.map((character) => (
+          <div className="input-group mb-2">
+            <span className="input-group-text">Search Character</span>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              type="search"
+              className="form-control"
+              placeholder="Character to search"
+              aria-label="Character"
+            />
+          </div>
+        </div>
+        <div className="row">
+          {filteredItems.map((character) => (
             <div key={character.id} className="col-md-3 col-xl-2 col-sm-4 mb-3">
               <CharacterCard
                 character={character}
